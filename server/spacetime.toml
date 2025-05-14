@@ -1,0 +1,3 @@
+name = "metasiberia"
+uuid = "b52aa942-e205-4ba3-bc4a-efd72d5f83aa"
+client_path = "../client/src/generated"
