@@ -1,0 +1,9 @@
+C:\Three\metasiberia\server\target\release\deps\spacetimedb_bindings_macro-08fd24a8190e921a.dll: C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\lib.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\reducer.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\sats.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\table.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\util.rs
+
+C:\Three\metasiberia\server\target\release\deps\spacetimedb_bindings_macro-08fd24a8190e921a.d: C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\lib.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\reducer.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\sats.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\table.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\util.rs
+
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\lib.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\reducer.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\sats.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\table.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spacetimedb-bindings-macro-1.1.2\src\util.rs:

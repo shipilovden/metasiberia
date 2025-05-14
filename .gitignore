@@ -36,7 +36,7 @@ target/
 **/*.rs.bk
 
 # Distribution
-dist/
+# dist/
 
 # --- ВАЖНО ---
 # Разрешаем добавлять модели

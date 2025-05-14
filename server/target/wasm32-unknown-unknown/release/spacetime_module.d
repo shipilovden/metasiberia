@@ -1,0 +1,1 @@
+C:\Three\metasiberia\server\target\wasm32-unknown-unknown\release\spacetime_module.wasm: C:\Three\metasiberia\server\src\common.rs C:\Three\metasiberia\server\src\lib.rs C:\Three\metasiberia\server\src\player_logic.rs

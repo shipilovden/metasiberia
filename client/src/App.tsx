@@ -375,7 +375,9 @@ function App() {
         return;
     }
 
-    const dbHost = "localhost:3000";
+    const dbHost = import.meta.env.PROD
+    ? "maincloud.spacetimedb.com"
+    : "localhost:3000";
     const dbName = "vibe-multiplayer";
 
     console.log(`Connecting to SpacetimeDB at ${dbHost}, database: ${dbName}...`);
@@ -404,8 +406,9 @@ function App() {
       setLocalPlayer(null);
     };
 
+    const protocol = import.meta.env.PROD ? "wss" : "ws";
     moduleBindings.DbConnection.builder()
-      .withUri(`ws://${dbHost}`)
+      .withUri(`${protocol}://${dbHost}`)
       .withModuleName(dbName)
       .onConnect(onConnect)
       .onDisconnect(onDisconnect)

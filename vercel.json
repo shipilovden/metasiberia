@@ -2,14 +2,19 @@
     "builds": [
       {
         "src": "client/package.json",
-        "use": "@vercel/node"
+        "use": "@vercel/static-build",
+        "config": {
+          "installCommand": "cd client && npm install",
+          "buildCommand": "cd client && npm run build",
+          "outputDirectory": "client/dist"
+        }
       }
     ],
-    "routes": [
+    "framework": "vite",
+    "rewrites": [
       {
-        "src": "/(.*)",
-        "dest": "client/$1"
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
-    ],
-    "framework": "vite"
+    ]
   }

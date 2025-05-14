@@ -1,0 +1,11 @@
+C:\Three\metasiberia\server\target\wasm32-unknown-unknown\release\deps\libgetrandom-9cc4d54ace9bcfa1.rmeta: C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\lib.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\util.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\custom.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error_impls.rs
+
+C:\Three\metasiberia\server\target\wasm32-unknown-unknown\release\deps\libgetrandom-9cc4d54ace9bcfa1.rlib: C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\lib.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\util.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\custom.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error_impls.rs
+
+C:\Three\metasiberia\server\target\wasm32-unknown-unknown\release\deps\getrandom-9cc4d54ace9bcfa1.d: C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\lib.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\util.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\custom.rs C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error_impls.rs
+
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\lib.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\util.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\custom.rs:
+C:\Users\densh\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.2.16\src\error_impls.rs:
