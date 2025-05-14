@@ -42,3 +42,4 @@ dist/
 # Разрешаем добавлять модели
 !client/public/models/
 !client/public/models/**/*
+.vercel
