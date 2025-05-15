@@ -378,7 +378,7 @@ function App() {
     const dbHost = import.meta.env.PROD
     ? "maincloud.spacetimedb.com"
     : "localhost:3000";
-    const dbName = "vibe-multiplayer";
+    const dbName = "metasiberia";
 
     console.log(`Connecting to SpacetimeDB at ${dbHost}, database: ${dbName}...`);
 

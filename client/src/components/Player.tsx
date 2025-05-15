@@ -202,6 +202,8 @@ export const Player: React.FC<PlayerProps> = ({
   useEffect(() => {
     if (!playerData) return; // Guard clause
     const loader = new FBXLoader();
+    // @ts-ignore
+    loader.setResponseType?.("arraybuffer");
 
     loader.load(
       mainModelPath,
@@ -315,36 +317,51 @@ export const Player: React.FC<PlayerProps> = ({
     
     console.log('Animation paths:', animationPaths);
     
-    const loader = new FBXLoader();
     const newAnimations: Record<string, THREE.AnimationAction> = {};
-    let loadedCount = 0;
-    const totalCount = Object.keys(animationPaths).length;
-    
-    console.log(`Will load ${totalCount} animations`);
-    
-    // Load each animation
-    Object.entries(animationPaths).forEach(([name, path]) => {
-      console.log(`Loading animation "${name}" from ${path}`);
-      
-      // First check if the file exists
-      fetch(path)
-        .then(response => {
-          if (!response.ok) {
-            console.error(`Animation file not found: ${path} (${response.status})`);
-            loadedCount++;
-            checkCompletedLoading();
-            return;
-          }
-          
-          // File exists, proceed with loading
-          loadAnimationFile(name, path, mixerInstance);
-        })
-        .catch(error => {
-          console.error(`Network error checking animation file ${path}:`, error);
-          loadedCount++;
-          checkCompletedLoading();
-        });
-    });
+let loadedCount = 0;
+const totalCount = Object.keys(animationPaths).length;
+
+console.log(`Will load ${totalCount} animations`);
+
+Object.entries(animationPaths).forEach(([name, path]) => {
+  const loader = new FBXLoader();
+  loader.load(
+    path,
+    (fbx) => {
+      if (!fbx.animations || fbx.animations.length === 0) {
+        console.warn(`No animations in ${path}`);
+        checkCompleted();
+        return;
+      }
+      const clip = fbx.animations[0];
+      const action = mixerInstance.clipAction(clip);
+      if (name === 'idle' || name.startsWith('walk') || name.startsWith('run')) {
+        action.setLoop(THREE.LoopRepeat, Infinity);
+      } else {
+        action.setLoop(THREE.LoopOnce, 1);
+        action.clampWhenFinished = true;
+      }
+      newAnimations[name] = action;
+      checkCompleted();
+    },
+    undefined,
+    (err) => {
+      console.error(`Error loading ${path}:`, err);
+      checkCompleted();
+    }
+  );
+});
+
+function checkCompleted() {
+  loadedCount++;
+  if (loadedCount === totalCount) {
+    setAnimations(newAnimations);
+    if (newAnimations['idle']) {
+      newAnimations['idle'].play();
+      setCurrentAnimation('idle');
+    }
+  }
+}
 
     // Function to check if all animations are loaded
     const checkCompletedLoading = () => {
@@ -394,6 +411,7 @@ export const Player: React.FC<PlayerProps> = ({
         return;
       }
       
+      const loader = new FBXLoader();
       loader.load(
         path,
         (animFbx) => {
