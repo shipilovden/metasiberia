@@ -46,7 +46,7 @@ export const JoinGameDialog: React.FC<JoinGameDialogProps> = ({ onJoin }) => {
   return (
     <div style={styles.overlay}>
       <form style={styles.dialog} onSubmit={handleSubmit}>
-        <h2>Join Game</h2>
+        <h2>Join to Metasiberia</h2>
         <div style={styles.inputGroup}>
           <label htmlFor="username" style={styles.label}>Character Name:</label>
           <input

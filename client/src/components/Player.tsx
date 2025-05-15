@@ -225,19 +225,30 @@ export const Player: React.FC<PlayerProps> = ({
           // Apply position adjustment after adding to group
           fbx.position.y = -0.1; // Lower the model slightly
           
-          // --- TRY AGAIN: Traverse to remove embedded lights --- 
-          try { 
-            console.log(`[Player Model Effect ${playerData.username}] Traversing loaded FBX to find embedded lights...`);
-            fbx.traverse((child) => {
-              if (child && child instanceof THREE.Light) { 
-                // --- LOGGING ADDED HERE ---
-                console.log(`[Player Model Effect ${playerData.username}] --- FOUND AND REMOVING EMBEDDED LIGHT --- Name: ${child.name || 'Unnamed'}, Type: ${child.type}`);
-                child.removeFromParent();
-              }
-            });
-          } catch (traverseError) {
-             console.error(`[Player Model Effect ${playerData.username}] Error during fbx.traverse for light removal:`, traverseError);
-          }
+          // --- TRY AGAIN: Traverse to remove embedded lights ---
+const rootObject = (fbx as any)?.scene || fbx;
+
+console.log('[DEBUG] typeof rootObject:', typeof rootObject);
+console.log('[DEBUG] rootObject.constructor.name:', rootObject?.constructor?.name);
+console.log('[DEBUG] rootObject:', rootObject);
+
+if (rootObject && typeof rootObject.traverse === 'function') {
+  try {
+    console.log(`[Player Model Effect ${playerData.username}] Traversing FBX for lights...`);
+    rootObject.traverse((child: any) => {
+      if (child && child.isLight) {
+        console.log(`[Player Model Effect ${playerData.username}] --- REMOVING LIGHT --- Name: ${child.name}`);
+        child.removeFromParent();
+      }
+    });
+  } catch (e) {
+    console.error(`[Player Model Effect ${playerData.username}] Traverse error:`, e);
+  }
+} else {
+  console.warn(`[Player Model Effect ${playerData.username}] No valid root object with traverse function`);
+}
+
+      
           // --- END TRAVERSE ATTEMPT --- 
 
         } 
