@@ -164,6 +164,6 @@ metasiberia/
 ## 🤝 Контакты
 Автор: @shipilovden
 
-## Проект: https://metasiberia.vercel.app
+## Проект: https://metasiberia.vercel.app/ 
 
 ## Команда: Metasiberia Lab
