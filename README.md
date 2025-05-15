@@ -37,19 +37,13 @@ Metasiberia — это лёгкий, но мощный стартер для с�
 Установите CLI SpacetimeDB:
 
 powershell
-Копировать
-Редактировать
 cargo install spacetimedb-cli
 Установите Vercel CLI (для деплоя):
 
 powershell
-Копировать
-Редактировать
 npm install -g vercel
 📁 2. Создайте рабочую папку и клонируйте проект
 powershell
-Копировать
-Редактировать
 mkdir C:\Three
 cd C:\Three
 
@@ -59,21 +53,15 @@ cd metasiberia
 Создай файл start_metasiberia.bat в корне (C:\Three\metasiberia) с содержанием:
 
 bat
-Копировать
-Редактировать
 @echo off
 start powershell -NoExit -Command "cd server; spacetimedb-cli start"
 start powershell -NoExit -Command "cd client; spacetimedb-cli generate --lang typescript --out-dir src/generated; npm install; npm run dev"
 Запуск:
 
 powershell
-Копировать
-Редактировать
 .\start_metasiberia.bat
 🌐 4. Открой в браузере
 arduino
-Копировать
-Редактировать
 http://localhost:5173
 🧠 Мультиплеер на базе SpacetimeDB
 В проекте используется SpacetimeDB — это не просто WebSocket, а полноценная игровая база данных в реальном времени.
@@ -85,21 +73,15 @@ http://localhost:5173
 
 📌 1. Убедись, что spacetime.toml настроен:
 toml
-Копировать
-Редактировать
 name = "metasiberia"
 uuid = "твой-уникальный-id" # можно сгенерировать автоматически
 client_path = "../client/src/generated"
 ⚙️ 2. Сгенерируй биндинги:
 powershell
-Копировать
-Редактировать
 cd C:\Three\metasiberia\server
 spacetimedb-cli generate --lang typescript --out-dir ../client/src/generated
 🧱 3. Построй и опубликуй базу:
 powershell
-Копировать
-Редактировать
 spacetimedb-cli publish metasiberia
 В ответ появится предупреждение: Are you sure you want to publish to maincloud...?
 
@@ -109,8 +91,6 @@ spacetimedb-cli publish metasiberia
 
 🔁 4. В коде клиента автоматически выбирается:
 ts
-Копировать
-Редактировать
 const dbHost = import.meta.env.PROD
   ? "maincloud.spacetimedb.com"
   : "localhost:3000";
@@ -121,13 +101,9 @@ const dbHost = import.meta.env.PROD
 
 1. Перейди в папку клиента
 powershell
-Копировать
-Редактировать
 cd C:\Three\metasiberia\client
 2. Выполни деплой:
 powershell
-Копировать
-Редактировать
 vercel --prod
 При первом запуске:
 
@@ -142,38 +118,26 @@ Want to modify settings?	No
 После деплоя ты получишь ссылку, например:
 
 arduino
-Копировать
-Редактировать
 https://metasiberia.vercel.app
 💾 Как сохранять изменения в проект
 Открой PowerShell:
 
 powershell
-Копировать
-Редактировать
 cd C:\Three\metasiberia
 Добавь все изменения:
 
 powershell
-Копировать
-Редактировать
 git add .
 Сделай коммит:
 
 powershell
-Копировать
-Редактировать
 git commit -m "fix: обновлён ридми и сцена"
 Отправь в репозиторий:
 
 powershell
-Копировать
-Редактировать
 git push origin main
 🛠 Структура проекта
 csharp
-Копировать
-Редактировать
 metasiberia/
 ├── client/                  # Фронтенд (React + Three.js)
 │   ├── public/              # Модели, ассеты, fbx
