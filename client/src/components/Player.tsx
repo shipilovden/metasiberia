@@ -202,8 +202,6 @@ export const Player: React.FC<PlayerProps> = ({
   useEffect(() => {
     if (!playerData) return; // Guard clause
     const loader = new FBXLoader();
-    // @ts-ignore
-    loader.setResponseType?.("arraybuffer");
 
     loader.load(
       mainModelPath,
@@ -225,30 +223,19 @@ export const Player: React.FC<PlayerProps> = ({
           // Apply position adjustment after adding to group
           fbx.position.y = -0.1; // Lower the model slightly
           
-          // --- TRY AGAIN: Traverse to remove embedded lights ---
-const rootObject = (fbx as any)?.scene || fbx;
-
-console.log('[DEBUG] typeof rootObject:', typeof rootObject);
-console.log('[DEBUG] rootObject.constructor.name:', rootObject?.constructor?.name);
-console.log('[DEBUG] rootObject:', rootObject);
-
-if (rootObject && typeof rootObject.traverse === 'function') {
-  try {
-    console.log(`[Player Model Effect ${playerData.username}] Traversing FBX for lights...`);
-    rootObject.traverse((child: any) => {
-      if (child && child.isLight) {
-        console.log(`[Player Model Effect ${playerData.username}] --- REMOVING LIGHT --- Name: ${child.name}`);
-        child.removeFromParent();
-      }
-    });
-  } catch (e) {
-    console.error(`[Player Model Effect ${playerData.username}] Traverse error:`, e);
-  }
-} else {
-  console.warn(`[Player Model Effect ${playerData.username}] No valid root object with traverse function`);
-}
-
-      
+          // --- TRY AGAIN: Traverse to remove embedded lights --- 
+          try { 
+            console.log(`[Player Model Effect ${playerData.username}] Traversing loaded FBX to find embedded lights...`);
+            fbx.traverse((child) => {
+              if (child && child instanceof THREE.Light) { 
+                // --- LOGGING ADDED HERE ---
+                console.log(`[Player Model Effect ${playerData.username}] --- FOUND AND REMOVING EMBEDDED LIGHT --- Name: ${child.name || 'Unnamed'}, Type: ${child.type}`);
+                child.removeFromParent();
+              }
+            });
+          } catch (traverseError) {
+             console.error(`[Player Model Effect ${playerData.username}] Error during fbx.traverse for light removal:`, traverseError);
+          }
           // --- END TRAVERSE ATTEMPT --- 
 
         } 
@@ -328,51 +315,36 @@ if (rootObject && typeof rootObject.traverse === 'function') {
     
     console.log('Animation paths:', animationPaths);
     
+    const loader = new FBXLoader();
     const newAnimations: Record<string, THREE.AnimationAction> = {};
-let loadedCount = 0;
-const totalCount = Object.keys(animationPaths).length;
-
-console.log(`Will load ${totalCount} animations`);
-
-Object.entries(animationPaths).forEach(([name, path]) => {
-  const loader = new FBXLoader();
-  loader.load(
-    path,
-    (fbx) => {
-      if (!fbx.animations || fbx.animations.length === 0) {
-        console.warn(`No animations in ${path}`);
-        checkCompleted();
-        return;
-      }
-      const clip = fbx.animations[0];
-      const action = mixerInstance.clipAction(clip);
-      if (name === 'idle' || name.startsWith('walk') || name.startsWith('run')) {
-        action.setLoop(THREE.LoopRepeat, Infinity);
-      } else {
-        action.setLoop(THREE.LoopOnce, 1);
-        action.clampWhenFinished = true;
-      }
-      newAnimations[name] = action;
-      checkCompleted();
-    },
-    undefined,
-    (err) => {
-      console.error(`Error loading ${path}:`, err);
-      checkCompleted();
-    }
-  );
-});
-
-function checkCompleted() {
-  loadedCount++;
-  if (loadedCount === totalCount) {
-    setAnimations(newAnimations);
-    if (newAnimations['idle']) {
-      newAnimations['idle'].play();
-      setCurrentAnimation('idle');
-    }
-  }
-}
+    let loadedCount = 0;
+    const totalCount = Object.keys(animationPaths).length;
+    
+    console.log(`Will load ${totalCount} animations`);
+    
+    // Load each animation
+    Object.entries(animationPaths).forEach(([name, path]) => {
+      console.log(`Loading animation "${name}" from ${path}`);
+      
+      // First check if the file exists
+      fetch(path)
+        .then(response => {
+          if (!response.ok) {
+            console.error(`Animation file not found: ${path} (${response.status})`);
+            loadedCount++;
+            checkCompletedLoading();
+            return;
+          }
+          
+          // File exists, proceed with loading
+          loadAnimationFile(name, path, mixerInstance);
+        })
+        .catch(error => {
+          console.error(`Network error checking animation file ${path}:`, error);
+          loadedCount++;
+          checkCompletedLoading();
+        });
+    });
 
     // Function to check if all animations are loaded
     const checkCompletedLoading = () => {
@@ -422,7 +394,6 @@ function checkCompleted() {
         return;
       }
       
-      const loader = new FBXLoader();
       loader.load(
         path,
         (animFbx) => {
