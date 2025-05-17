@@ -42,7 +42,9 @@ powershell
 npm install -g vercel
 ## 📁 2. Создайте рабочую папку и клонируйте проект
 powershell
+
 mkdir C:\Three
+
 cd C:\Three
 
 git clone https://github.com/shipilovden/metasiberia.git
